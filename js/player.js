@@ -410,8 +410,30 @@ class ExhibitionPlayer {
   }
 }
 
+function createDynamicStars() {
+  const container = document.querySelector('.dynamic-stars');
+  if (!container) return;
+
+  const numStars = 50;
+  for (let i = 0; i < numStars; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    
+    const duration = 2 + Math.random() * 3;
+    const delay = Math.random() * 2;
+
+    star.style.animationDuration = `${duration}s, ${duration}s`;
+    star.style.animationDelay = `${delay}s, ${delay}s`;
+
+    container.appendChild(star);
+  }
+}
+
 // 초기화
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🚀 Aster Alarm 전시용 플레이어 시작');
   new ExhibitionPlayer();
+  createDynamicStars();
 });
