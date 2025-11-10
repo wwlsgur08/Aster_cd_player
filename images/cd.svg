@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <radialGradient id="cdGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0e7490;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="shineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  
+  <!-- LP 레코드 메인 -->
+  <circle cx="250" cy="250" r="240" fill="url(#cdGradient)" />
+  
+  <!-- 빛 반사 효과 -->
+  <circle cx="250" cy="250" r="240" fill="url(#shineGradient)" opacity="0.6" />
+  
+  <!-- 홀로그램 효과 (동심원 그루브) -->
+  <circle cx="250" cy="250" r="220" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="210" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="200" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="190" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="180" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="170" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="160" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="150" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="140" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="130" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="120" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  <circle cx="250" cy="250" r="110" fill="none" stroke="#000000" stroke-width="0.5" opacity="0.2" />
+  
+  <!-- 중앙 라벨 -->
+  <circle cx="250" cy="250" r="100" fill="url(#centerGradient)" />
+  <circle cx="250" cy="250" r="95" fill="none" stroke="#d0d0d0" stroke-width="2" />
+  
+  <!-- 중앙 홀 -->
+  <circle cx="250" cy="250" r="25" fill="#1a1a3f" />
+  <circle cx="250" cy="250" r="23" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.8" />
+  
+  <!-- 라벨 텍스트 -->
+  <text x="250" y="230" font-family="Orbitron, sans-serif" font-size="24" font-weight="900" 
+        fill="#06b6d4" text-anchor="middle">ASTER</text>
+  <text x="250" y="255" font-family="Orbitron, sans-serif" font-size="18" font-weight="700" 
+        fill="#3b82f6" text-anchor="middle">ALARM</text>
+  <text x="250" y="275" font-family="Noto Sans KR, sans-serif" font-size="10" 
+        fill="#64748b" text-anchor="middle">✨ 매력 음악 ✨</text>
+  
+  <!-- 반짝임 효과 -->
+  <circle cx="180" cy="180" r="15" fill="#ffffff" opacity="0.15" />
+  <circle cx="140" cy="320" r="12" fill="#06b6d4" opacity="0.15" />
+  <circle cx="340" cy="160" r="18" fill="#3b82f6" opacity="0.15" />
+  <circle cx="360" cy="340" r="10" fill="#ffffff" opacity="0.15" />
+</svg>
