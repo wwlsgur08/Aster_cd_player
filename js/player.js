@@ -191,7 +191,9 @@ class ExhibitionPlayer {
     this.totalTimeEl = document.getElementById('total-time');
     this.trackTitle = document.getElementById('track-title');
     this.trackSubtitle = document.getElementById('track-subtitle');
-    this.cdImage = document.getElementById('cd-image');
+    this.lpRecord = document.getElementById('lp-record');
+    this.tonearm = document.getElementById('tonearm');
+    this.recordLabel = document.getElementById('record-label');
     this.playlistContainer = document.getElementById('playlist-container');
     this.musicInfo = document.getElementById('music-info');
     this.infoName = document.getElementById('info-name');
@@ -257,10 +259,7 @@ class ExhibitionPlayer {
       item.innerHTML = `
         <div class="playlist-item-header">
           <div class="playlist-item-name">${track.name}의 매력 음악</div>
-          ${isActive ? '<div class="playlist-item-status">재생중</div>' : ''}
-        </div>
-        <div class="playlist-item-category" style="background: linear-gradient(135deg, ${category.color.from}, ${category.color.to})">
-          ${category.name}
+          ${isActive && this.isPlaying ? '<div class="playlist-item-status">재생중</div>' : ''}
         </div>
         <div class="playlist-item-charms">${charmsHTML}</div>
         <div class="playlist-item-meta">
@@ -269,7 +268,10 @@ class ExhibitionPlayer {
         </div>
       `;
       
-      item.addEventListener('click', () => this.selectTrack(index));
+      item.addEventListener('click', () => {
+        this.selectTrack(index);
+        this.audioPlayer.play();
+      });
       this.playlistContainer.appendChild(item);
     });
   }
@@ -288,9 +290,6 @@ class ExhibitionPlayer {
     this.updateMusicInfo(track, category);
     this.renderPlaylist();
     
-    // CD 이미지 색상 업데이트
-    this.updateCDColor(category);
-    
     // 오디오 로드
     this.audioPlayer.src = track.audioUrl;
     
@@ -298,8 +297,6 @@ class ExhibitionPlayer {
     this.playBtn.disabled = false;
     this.prevBtn.disabled = this.currentIndex === 0;
     this.nextBtn.disabled = this.currentIndex === this.tracks.length - 1;
-    
-    // 자동 재생은 하지 않음 (사용자가 재생 버튼을 눌러야 함)
   }
 
   updateTrackInfo(track, category) {
@@ -316,19 +313,6 @@ class ExhibitionPlayer {
     ).join('');
   }
 
-  updateCDColor(category) {
-    // CD SVG의 그라데이션 색상 업데이트
-    const svg = this.cdImage.querySelector('svg') || this.cdImage;
-    if (svg) {
-      // SVG 내부의 그라데이션 스탑 색상 변경
-      const stops = svg.querySelectorAll('stop');
-      if (stops.length >= 2) {
-        stops[0].setAttribute('stop-color', category.color.from);
-        stops[1].setAttribute('stop-color', category.color.to);
-      }
-    }
-  }
-
   togglePlay() {
     if (this.audioPlayer.paused) {
       this.audioPlayer.play().catch(err => {
@@ -342,12 +326,14 @@ class ExhibitionPlayer {
   playPrevious() {
     if (this.currentIndex > 0) {
       this.selectTrack(this.currentIndex - 1);
+      this.audioPlayer.play();
     }
   }
 
   playNext() {
     if (this.currentIndex < this.tracks.length - 1) {
       this.selectTrack(this.currentIndex + 1);
+      this.audioPlayer.play();
     }
   }
 
@@ -374,8 +360,7 @@ class ExhibitionPlayer {
   onEnded() {
     // 자동으로 다음 곡 재생
     if (this.currentIndex < this.tracks.length - 1) {
-      this.selectTrack(this.currentIndex + 1);
-      this.audioPlayer.play();
+      this.playNext();
     } else {
       // 마지막 곡이면 처음으로
       this.selectTrack(0);
@@ -385,13 +370,17 @@ class ExhibitionPlayer {
   onPlay() {
     this.isPlaying = true;
     this.playBtn.querySelector('.play-icon').textContent = '⏸';
-    this.cdImage.classList.add('spinning');
+    this.lpRecord.classList.add('spinning');
+    this.tonearm.classList.add('playing');
+    this.renderPlaylist();
   }
 
   onPause() {
     this.isPlaying = false;
     this.playBtn.querySelector('.play-icon').textContent = '▶';
-    this.cdImage.classList.remove('spinning');
+    this.lpRecord.classList.remove('spinning');
+    this.tonearm.classList.remove('playing');
+    this.renderPlaylist();
   }
 
   handleKeyboard(e) {
