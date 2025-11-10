@@ -44,65 +44,67 @@
     <div class="exhibition-layout">
       <!-- 왼쪽: LP/CD 플레이어 -->
       <div class="left-panel">
-        <!-- 로고 -->
-        <div class="logo-container">
-          <img src="./images/logo.svg" alt="Aster Alarm Logo" class="logo-image">
-        </div>
-
-        <!-- 제목 -->
-        <h1 class="main-title">매력 음악 플레이어</h1>
-
-        <!-- CD 플레이어 -->
-        <div class="cd-player-wrapper">
-          <div class="cd-container">
-            <img src="./images/cd.svg" alt="CD" class="cd-image" id="cd-image">
-            <div class="cd-center-hole"></div>
+        <div class="music-player-card">
+          <!-- 로고 -->
+          <div class="logo-container">
+            <img src="./images/logo.svg" alt="Aster Alarm Logo" class="logo-image">
           </div>
-        </div>
 
-        <!-- 트랙 정보 -->
-        <div class="track-info">
-          <div class="track-title" id="track-title">🎵 음악을 선택해주세요</div>
-          <div class="track-subtitle" id="track-subtitle">오른쪽 플레이리스트에서 곡을 선택하세요</div>
-        </div>
+          <!-- 제목 -->
+          <h1 class="main-title">매력 음악 플레이어</h1>
 
-        <!-- 플레이어 컨트롤 -->
-        <div class="player-controls">
-          <button class="control-btn" id="prev-btn" disabled>
-            <span class="control-icon">⏮</span>
-          </button>
-          <button class="play-btn" id="play-btn" disabled>
-            <span class="play-icon">▶</span>
-          </button>
-          <button class="control-btn" id="next-btn" disabled>
-            <span class="control-icon">⏭</span>
-          </button>
-        </div>
-
-        <!-- 진행 바 -->
-        <div class="progress-container">
-          <div class="progress-bar" id="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
+          <!-- CD 플레이어 -->
+          <div class="cd-player-wrapper">
+            <div class="cd-container">
+              <img src="./images/cd.svg" alt="CD" class="cd-image" id="cd-image">
+              <div class="cd-center-hole"></div>
+            </div>
           </div>
-          <div class="time-display">
-            <span id="current-time">0:00</span>
-            <span id="total-time">0:00</span>
-          </div>
-        </div>
 
-        <!-- 음악 정보 -->
-        <div class="music-info-box hidden" id="music-info">
-          <div class="info-row">
-            <span class="info-label">이름</span>
-            <span class="info-value" id="info-name">-</span>
+          <!-- 트랙 정보 -->
+          <div class="track-info">
+            <div class="track-title" id="track-title">🎵 음악을 선택해주세요</div>
+            <div class="track-subtitle" id="track-subtitle">오른쪽 플레이리스트에서 곡을 선택하세요</div>
           </div>
-          <div class="info-row">
-            <span class="info-label">매력 조합</span>
-            <div class="info-charms" id="info-charms"></div>
-          </div>
-        </div>
 
-        <audio id="audio-player" preload="none"></audio>
+          <!-- 플레이어 컨트롤 -->
+          <div class="player-controls">
+            <button class="control-btn" id="prev-btn" disabled>
+              <span class="control-icon">⏮</span>
+            </button>
+            <button class="play-btn" id="play-btn" disabled>
+              <span class="play-icon">▶</span>
+            </button>
+            <button class="control-btn" id="next-btn" disabled>
+              <span class="control-icon">⏭</span>
+            </button>
+          </div>
+
+          <!-- 진행 바 -->
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="time-display">
+              <span id="current-time">0:00</span>
+              <span id="total-time">0:00</span>
+            </div>
+          </div>
+
+          <!-- 음악 정보 -->
+          <div class="music-info-box hidden" id="music-info">
+            <div class="info-row">
+              <span class="info-label">이름</span>
+              <span class="info-value" id="info-name">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">매력 조합</span>
+              <div class="info-charms" id="info-charms"></div>
+            </div>
+          </div>
+
+          <audio id="audio-player" preload="none"></audio>
+        </div>
       </div>
 
       <!-- 오른쪽: 플레이리스트 -->
