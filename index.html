@@ -1,139 +1,15 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>Aster Alarm – 매력 음악 플레이어 (전시용)</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <!-- 별자리 배경 -->
-    <div class="starry-background">
-      <svg class="constellation-svg" viewBox="0 0 1000 800">
-        <defs>
-          <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#06b6d4" />
-            <stop offset="100%" stop-color="#67e8f9" />
-          </linearGradient>
-        </defs>
-        <path d="M100,100 L200,150 L300,120 L400,180 L500,140" />
-        <path d="M600,200 L700,250 L800,220 L900,280" style="animation-delay: 0.5s" />
-        <path d="M150,400 L250,450 L350,420 L450,480 L550,440" style="animation-delay: 1s" />
-        <circle cx="100" cy="100" r="2" />
-        <circle cx="200" cy="150" r="2" style="animation-delay: 0.1s" />
-        <circle cx="300" cy="120" r="2" style="animation-delay: 0.2s" />
-        <circle cx="400" cy="180" r="2" style="animation-delay: 0.3s" />
-        <circle cx="500" cy="140" r="2" style="animation-delay: 0.4s" />
-        <circle cx="600" cy="200" r="2" style="animation-delay: 0.5s" />
-        <circle cx="700" cy="250" r="2" style="animation-delay: 0.6s" />
-        <circle cx="800" cy="220" r="2" style="animation-delay: 0.7s" />
-        <circle cx="900" cy="280" r="2" style="animation-delay: 0.8s" />
-        <circle cx="150" cy="400" r="2" style="animation-delay: 0.9s" />
-        <circle cx="250" cy="450" r="2" style="animation-delay: 1s" />
-        <circle cx="350" cy="420" r="2" style="animation-delay: 1.1s" />
-        <circle cx="450" cy="480" r="2" style="animation-delay: 1.2s" />
-        <circle cx="550" cy="440" r="2" style="animation-delay: 1.3s" />
-      </svg>
-      <div class="dynamic-stars"></div>
-    </div>
 
-    <div class="relative z-10 container mx-auto px-4 py-8">
-      <!-- Header -->
-      <header class="text-center mb-12">
-        <div class="flex items-center justify-center gap-3 mb-4">
-          <svg class="header-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-          <h1 class="main-title">Aster Alarm</h1>
-        </div>
-        <p class="text-slate-300">
-          디지털 LP판 매력 음악 플레이어
-        </p>
-      </header>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Music Player Integration</title>
+    </head>
 
-      <main class="exhibition-layout">
-        <!-- 왼쪽: LP/CD 플레이어 -->
-        <div class="left-panel">
-          <div class="music-player-card">
-                          <!-- LP 플레이어 -->
-                          <div class="lp-player-wrapper">
-                            <div class="platter">
-                              <div class="lp-record" id="lp-record">
-                                <!-- Grooves -->
-                                <!-- Center Label -->
-                                <div class="record-label" id="record-label">
-                                  <div class="record-label-content">
-                                    <div class="record-label-icon">✨</div>
-                                    <div class="record-label-text">Aster</div>
-                                    <div class="record-label-text">Alarm</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- Tonearm (Stylus) -->
-                            <div class="tonearm" id="tonearm">
-                              <div class="head"></div>
-                            </div>
-                          </div>
-              <!-- 트랙 정보 -->
-              <div class="track-info">
-                <div class="track-title" id="track-title">🎵 음악을 선택해주세요</div>
-                <div class="track-subtitle" id="track-subtitle">매력 음악</div>
-              </div>
-
-              <!-- 플레이어 컨트롤 -->
-              <div class="player-controls">
-                <button class="control-btn" id="prev-btn" disabled>
-                  <span class="control-icon">⏮</span>
-                </button>
-                <button class="play-btn" id="play-btn" disabled>
-                  <span class="play-icon">▶</span>
-                </button>
-                <button class="control-btn" id="next-btn" disabled>
-                  <span class="control-icon">⏭</span>
-                </button>
-              </div>
-
-              <!-- 진행 바 -->
-              <div class="progress-container">
-                <div class="progress-bar" id="progress-bar">
-                  <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <div class="time-display">
-                  <span id="current-time">0:00</span>
-                  <span id="total-time">0:00</span>
-                </div>
-              </div>
-
-              <!-- 음악 정보 -->
-              <div class="music-info-box hidden" id="music-info">
-                <div class="info-row">
-                  <span class="info-label">이름</span>
-                  <span class="info-value" id="info-name">-</span>
-                </div>
-                <div class="info-row">
-                  <span class="info-label">매력 조합</span>
-                  <div class="info-charms" id="info-charms"></div>
-                </div>
-              </div>
-
-              <audio id="audio-player" preload="none"></audio>
-          </div>
-        </div>
-
-        <!-- 오른쪽: 플레이리스트 -->
-        <div class="right-panel">
-          <div id="playlist-container" class="playlist-scroll">
-            <div class="loading-message">데모곡을 불러오는 중...</div>
-          </div>
-        </div>
-      </main>
-
-      <footer class="footer">
-        <small>© Aster Alarm Exhibition</small>
-      </footer>
-    </div>
-    <script type="module" src="./js/player.js"></script>
-  </body>
-</html>
+    <body>
+      <div id="root"></div>
+      <script type="module" src="/src/main.tsx"></script>
+    </body>
+  </html>
+  
