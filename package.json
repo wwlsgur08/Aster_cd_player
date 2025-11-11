@@ -1,5 +1,5 @@
 {
-      "name": "Music Player Integration",
+      "name": "aster-cd-player",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
