@@ -234,9 +234,12 @@ export default function App() {
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Header */}
         <header className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Music className="w-10 h-10 text-cyan-300" />
-            <h1 className="text-white">Aster Alarm</h1>
+          <div className="flex items-center justify-center mb-4">
+            <img 
+              src="/src/assets/images/logo.png" 
+              alt="Aster Alarm Logo" 
+              className="h-16 object-contain"
+            />
           </div>
           <p className="text-slate-300">
             디지털 LP판 매력 음악 플레이어

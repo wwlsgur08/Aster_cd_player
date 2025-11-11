@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Download, Volume2, VolumeX } from 'lucide-react';
-import { getDominantCategory } from '../utils/charmCategories';
+import { getDominantCategory, getCDImage } from '../utils/charmCategories';
 
 interface MusicTrack {
   id: string;
@@ -23,8 +23,9 @@ export function MusicPlayer({ track }: MusicPlayerProps) {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // 트랙의 지배적인 카테고리 색상 가져오기
+  // 트랙의 지배적인 카테고리 색상 및 CD 이미지 가져오기
   const dominantCategory = getDominantCategory(track.traits);
+  const cdImage = getCDImage(track.traits);
 
   useEffect(() => {
     // 트랙이 변경되면 재생 중지
@@ -93,26 +94,18 @@ export function MusicPlayer({ track }: MusicPlayerProps) {
       {/* LP Record Container */}
       <div className="relative mb-8">
         <div className="aspect-square max-w-md mx-auto relative">
-          {/* Vinyl Record */}
+          {/* CD Image */}
           <div 
-            className={`absolute inset-0 rounded-full bg-gradient-to-br ${dominantCategory.color.from} ${dominantCategory.color.to} shadow-2xl transition-all duration-500 ease-in-out ${
+            className={`absolute inset-0 transition-all duration-500 ease-in-out ${
               isPlaying ? 'animate-spin' : ''
             }`}
             style={{ animationDuration: '3s' }}
           >
-            {/* Record Grooves */}
-            <div className="absolute inset-8 rounded-full border-4 border-black/20" />
-            <div className="absolute inset-16 rounded-full border-4 border-black/20" />
-            <div className="absolute inset-24 rounded-full border-4 border-black/20" />
-            
-            {/* Center Label */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-white/90 to-white/80 shadow-xl flex items-center justify-center border-4 border-white/30">
-              <div className="text-center">
-                <div className="text-2xl mb-1">✨</div>
-                <div className="text-xs text-gray-700">Aster</div>
-                <div className="text-xs text-gray-700">Alarm</div>
-              </div>
-            </div>
+            <img 
+              src={cdImage} 
+              alt="CD Album" 
+              className="w-full h-full object-contain drop-shadow-2xl"
+            />
           </div>
 
           {/* Tonearm (Stylus) */}

@@ -165,3 +165,39 @@ export function getDominantCategory(traits: { charm_name: string; stage: number 
 
   return CHARM_CATEGORIES[dominantKey];
 }
+
+// 카테고리별 CD 이미지 매핑
+export const CD_IMAGES: Record<string, string> = {
+  empathy: '/src/assets/images/cd-pink.png',
+  responsibility: '/src/assets/images/cd-cyan.png',
+  curiosity: '/src/assets/images/cd-yellow.png',
+  stability: '/src/assets/images/cd-green.png',
+  morality: '/src/assets/images/cd-blue.png',
+  humor: '/src/assets/images/cd-orange.png',
+  passion: '/src/assets/images/cd-red.png'
+};
+
+// 카테고리에 해당하는 CD 이미지 가져오기
+export function getCDImage(traits: { charm_name: string; stage: number }[]): string {
+  const categoryCounts: Record<string, number> = {};
+
+  traits.forEach(trait => {
+    const categoryKey = getCategoryByCharm(trait.charm_name);
+    if (categoryKey) {
+      categoryCounts[categoryKey] = (categoryCounts[categoryKey] || 0) + 1;
+    }
+  });
+
+  // 가장 많이 나온 카테고리 찾기
+  let maxCount = 0;
+  let dominantKey = 'passion'; // 기본값
+
+  for (const [key, count] of Object.entries(categoryCounts)) {
+    if (count > maxCount) {
+      maxCount = count;
+      dominantKey = key;
+    }
+  }
+
+  return CD_IMAGES[dominantKey];
+}
