@@ -236,7 +236,7 @@ export default function App() {
         <header className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <img 
-              src="/src/assets/images/logo.png" 
+              src="/images/logo.png" 
               alt="Aster Alarm Logo" 
               className="h-16 object-contain"
             />

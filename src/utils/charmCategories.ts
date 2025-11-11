@@ -168,13 +168,13 @@ export function getDominantCategory(traits: { charm_name: string; stage: number 
 
 // 카테고리별 CD 이미지 매핑
 export const CD_IMAGES: Record<string, string> = {
-  empathy: '/src/assets/images/cd-pink.png',
-  responsibility: '/src/assets/images/cd-cyan.png',
-  curiosity: '/src/assets/images/cd-yellow.png',
-  stability: '/src/assets/images/cd-green.png',
-  morality: '/src/assets/images/cd-blue.png',
-  humor: '/src/assets/images/cd-orange.png',
-  passion: '/src/assets/images/cd-red.png'
+  empathy: '/images/cd-pink.png',
+  responsibility: '/images/cd-cyan.png',
+  curiosity: '/images/cd-yellow.png',
+  stability: '/images/cd-green.png',
+  morality: '/images/cd-blue.png',
+  humor: '/images/cd-orange.png',
+  passion: '/images/cd-red.png'
 };
 
 // 카테고리에 해당하는 CD 이미지 가져오기
