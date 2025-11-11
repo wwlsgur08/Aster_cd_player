@@ -244,11 +244,23 @@ class ExhibitionPlayer {
   renderPlaylist() {
     this.playlistContainer.innerHTML = '';
     
+    // 헤더 추가
+    const header = document.createElement('div');
+    header.className = 'playlist-title';
+    header.innerHTML = `
+      <span style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.5rem;">🎵</span>
+        <span>매력 음악 리스트</span>
+      </span>
+      <span style="color: rgba(255, 255, 255, 0.7);">${this.tracks.length}곡</span>
+    `;
+    this.playlistContainer.appendChild(header);
+    
     this.tracks.forEach((track, index) => {
       const category = getDominantCategory(track.traits);
       const isActive = index === this.currentIndex;
       
-      const item = document.createElement('div');
+      const item = document.createElement('button');
       item.className = `playlist-item ${isActive ? 'active' : ''}`;
       item.dataset.index = index;
       
@@ -256,16 +268,54 @@ class ExhibitionPlayer {
         `<span class="charm-tag">${trait.charm_name} Lv.${trait.stage}</span>`
       ).join('');
       
+      // 아이콘의 그라데이션
+      const iconGradient = `background: linear-gradient(135deg, ${category.color.from}, ${category.color.to});`;
+      
+      // 카테고리 배지 그라데이션
+      const categoryGradient = `background: linear-gradient(to right, ${category.color.from}, ${category.color.to});`;
+      
+      // 재생 중 인디케이터
+      const playingIndicator = isActive && this.isPlaying ? `
+        <div class="playlist-item-indicator">
+          <div class="playlist-item-indicator-bar"></div>
+          <div class="playlist-item-indicator-bar"></div>
+          <div class="playlist-item-indicator-bar"></div>
+        </div>
+      ` : '';
+      
       item.innerHTML = `
-        <div class="playlist-item-header">
-          <div class="playlist-item-name">${track.name}의 매력 음악</div>
-          ${isActive && this.isPlaying ? '<div class="playlist-item-status">재생중</div>' : ''}
+        <!-- Mini LP Icon -->
+        <div class="playlist-item-icon" style="${iconGradient}">
+          🎵
         </div>
-        <div class="playlist-item-charms">${charmsHTML}</div>
-        <div class="playlist-item-meta">
-          <span>⏱ ${formatTime(track.duration)}</span>
-          <span>📅 ${formatDate(track.createdAt)}</span>
+        
+        <!-- Track Content -->
+        <div class="playlist-item-content">
+          <div class="playlist-item-header">
+            <div class="playlist-item-name">${track.name}의 매력 음악</div>
+            ${isActive && this.isPlaying ? `<div class="playlist-item-status" style="${categoryGradient}">재생중</div>` : ''}
+          </div>
+          
+          <!-- Category Badge -->
+          <div class="playlist-item-category" style="${categoryGradient}">${category.name}</div>
+          
+          <!-- Traits -->
+          <div class="playlist-item-charms">${charmsHTML}</div>
+          
+          <!-- Meta Info -->
+          <div class="playlist-item-meta">
+            <div class="playlist-item-meta-item">
+              <span>⏱</span>
+              <span>${formatTime(track.duration)}</span>
+            </div>
+            <div class="playlist-item-meta-item">
+              <span>📅</span>
+              <span>${formatDate(track.createdAt)}</span>
+            </div>
+          </div>
         </div>
+        
+        ${playingIndicator}
       `;
       
       item.addEventListener('click', () => {
@@ -288,6 +338,7 @@ class ExhibitionPlayer {
     // UI 업데이트
     this.updateTrackInfo(track, category);
     this.updateMusicInfo(track, category);
+    this.updateLPColor(category);
     this.renderPlaylist();
     
     // 오디오 로드
@@ -300,8 +351,29 @@ class ExhibitionPlayer {
   }
 
   updateTrackInfo(track, category) {
-    this.trackTitle.textContent = `🎵 ${track.name}의 매력 음악`;
+    this.trackTitle.textContent = `${track.name}의 매력 음악`;
     this.trackSubtitle.textContent = category.name;
+    this.trackSubtitle.style.background = `linear-gradient(to right, ${category.color.from}, ${category.color.to})`;
+  }
+  
+  updateLPColor(category) {
+    // LP 레코드의 그라데이션 색상 업데이트
+    const platter = document.querySelector('.platter');
+    if (platter) {
+      platter.style.background = `linear-gradient(135deg, ${category.color.from} 0%, ${category.color.to} 100%)`;
+    }
+    
+    // 컨트롤 버튼 색상 업데이트
+    const playBtn = this.playBtn;
+    if (playBtn) {
+      playBtn.style.background = `linear-gradient(135deg, ${category.color.from}, ${category.color.to})`;
+    }
+    
+    // 진행 바 색상 업데이트
+    const progressFill = this.progressFill;
+    if (progressFill) {
+      progressFill.style.background = `linear-gradient(to right, ${category.color.from}, ${category.color.to})`;
+    }
   }
 
   updateMusicInfo(track, category) {
